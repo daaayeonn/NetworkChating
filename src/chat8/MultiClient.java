@@ -1,7 +1,6 @@
 package chat8;
 
 import java.net.Socket;
-import java.net.URLEncoder;
 import java.util.Scanner;
 
 import chat4.Receiver;

@@ -33,7 +33,8 @@ public class Sender extends Thread {
 		
 		try {
 			// 최초 서버로 전송하는 메세지는 대화명
-			out.println(URLEncoder.encode(name, "UTF-8"));
+			name = URLEncoder.encode(name, "UTF-8");
+			out.println(name);
 			
 			// 두번째부터는 메세지이므로 입력내용을 서버로 전송한다.
 			while (out != null) {

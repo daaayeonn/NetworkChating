@@ -9,7 +9,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -104,8 +103,8 @@ public class MultiServer extends MyConnection {
 					/*
 					 매새자룰 보낼 때 사용되는 부분
 					 */
-					it_out.println("[" + name + "]: " + 
-							URLEncoder.encode(msg, "UTF-8"));
+					it_out.println("[" + URLEncoder.encode(name, "UTF-8") 
+						+ "]: " + URLEncoder.encode(msg, "UTF-8"));
 				}
 			} // try 끝
 			catch (Exception e) {
@@ -131,8 +130,9 @@ public class MultiServer extends MyConnection {
 				 */
 				if (clientName.equals(receiveName)) {
 					// 일차하면 한 사람에게만 귓속말을 보낸다.
-					it_out.println("[귓속말]" + name + ": " + 
-							URLEncoder.encode(msg, "UTF-8"));
+					it_out.println("[" +  URLEncoder.encode("귓속말", "UTF-8") +"]" 
+							+ URLEncoder.encode(name, "UTF-8") 
+							+ ": " + URLEncoder.encode(msg, "UTF-8"));
 				}
 			} // try 끝
 			catch (Exception e) {
@@ -173,8 +173,7 @@ public class MultiServer extends MyConnection {
 			try {
 				out = new PrintWriter(this.socket.getOutputStream(), true);
 				in = new BufferedReader(
-						new InputStreamReader(this.socket.getInputStream(),
-								"UTF-8"));
+						new InputStreamReader(this.socket.getInputStream()));
 			}
 			catch (Exception e) {
 				System.out.println("예외: " + e);
@@ -192,7 +191,8 @@ public class MultiServer extends MyConnection {
 				// 첫번째 메세지는 대화명이므로 접속을 알린다.
 				name = URLDecoder.decode(in.readLine(), "UTF-8");
 
-				sendAllMsg("", name + "님이 입장하셨습니다.");
+				sendAllMsg("", URLEncoder.encode(name, "UTF-8") + 
+						 URLEncoder.encode("님이 입장하셨습니다.", "UTF-8"));
 				clientMap.put(name, out);
 				
 				System.out.println(name + " 접속");
