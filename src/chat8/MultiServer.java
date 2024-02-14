@@ -191,7 +191,7 @@ public class MultiServer extends MyConnection {
 				// 첫번째 메세지는 대화명이므로 접속을 알린다.
 				name = URLDecoder.decode(in.readLine(), "UTF-8");
 
-				sendAllMsg("", URLEncoder.encode(name, "UTF-8") + 
+				sendAllMsg("", name + 
 						 URLEncoder.encode("님이 입장하셨습니다.", "UTF-8"));
 				clientMap.put(name, out);
 				
