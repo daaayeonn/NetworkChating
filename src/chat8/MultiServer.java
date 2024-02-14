@@ -141,6 +141,25 @@ public class MultiServer extends MyConnection {
 		} // while 끝
 	} // sendAllMsg (귓속말) 끝
 	
+	// 참가자 리스트 출력
+	public void chatLists(String lists) {
+		Iterator<String> it = clientMap.keySet().iterator();
+		
+		while (it.hasNext()) {
+			try {
+				String clientName = it.next();
+				PrintWriter it_out = 
+						(PrintWriter) clientMap.get(clientName);
+				
+				it_out.println(URLEncoder.encode(lists, "UTF-8"));
+				
+			} // try 끝
+			catch (Exception e) {
+				System.out.println("예외: " + e);
+			}
+		} // while 끝
+	} // chatLists (귓속말) 끝
+	
 	// 내부클래스
 	class MultiServerT extends Thread {
 
@@ -179,6 +198,7 @@ public class MultiServer extends MyConnection {
 				System.out.println(name + " 접속");
 				System.out.println("현재 접속자 수는 " + clientMap.size() + 
 						"명 입니다.");
+				
 				
 				// 두번째 메세지부터는 "대화내용"
 				while (in != null) {
@@ -233,6 +253,18 @@ public class MultiServer extends MyConnection {
 							 */
 							sendAllMsg(name, msgContent, strArr[1]);
 						} // if 끝
+						
+						// 참가자 목록
+						if (strArr[0].equals("/list")) {
+							Set<String> keys = clientMap.keySet();
+							keys.remove(name);
+							
+							for (String lists : keys) {
+								System.out.println(lists);
+								chatLists(lists);
+								clientMap.put(name, out);
+							}
+						}
 					} // if 끝
 					else {
 						// 슬러쉬가 없다면 일반 대화내용

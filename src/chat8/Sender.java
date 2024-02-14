@@ -4,9 +4,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.URLEncoder;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.Scanner;
 
 // 클라이언트가 입력한 메세지를 서버로 전송해주는 쓰레드 클래스

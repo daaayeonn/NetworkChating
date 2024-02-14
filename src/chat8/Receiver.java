@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URLDecoder;
 
 public class Receiver extends Thread {
 	
@@ -26,7 +27,8 @@ public class Receiver extends Thread {
 	public void run() {
 		while (in != null) {
 			try {
-				System.out.println("Thread Receive: " + in.readLine());
+				System.out.println("Thread Receive: " + 
+						URLDecoder.decode(in.readLine(), "UTF-8"));
 			}
 			catch (SocketException e) {
 				System.out.println("SocketException");
