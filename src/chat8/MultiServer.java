@@ -192,7 +192,7 @@ public class MultiServer extends MyConnection {
 				name = URLDecoder.decode(in.readLine(), "UTF-8");
 
 				sendAllMsg("", name + 
-						 URLEncoder.encode("님이 입장하셨습니다.", "UTF-8"));
+						 "님이 입장하셨습니다.");
 				clientMap.put(name, out);
 				
 				System.out.println(name + " 접속");
@@ -257,13 +257,16 @@ public class MultiServer extends MyConnection {
 						// 참가자 목록
 						if (strArr[0].equals("/list")) {
 							Set<String> keys = clientMap.keySet();
+							
 							keys.remove(name);
 							
 							for (String lists : keys) {
+								clientMap.put(name, out);
 								System.out.println(lists);
 								chatLists(lists);
-								clientMap.put(name, out);
+								clientMap.remove(name);
 							}
+//							clientMap.put(name, out);
 						}
 					} // if 끝
 					else {
